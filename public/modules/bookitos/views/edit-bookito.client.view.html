@@ -1,0 +1,111 @@
+<section data-ng-controller="BookitosController" data-ng-init="findOne()">
+    <div class="page-header">
+        <h1>Edit Bookito</h1>
+    </div>
+    <div class="container-fluid">
+   		<div class="col-md-5 col-sm-5 col-md-offset-1 pull-right">
+       		<img data-ng-src="{{coverImageUrl || 'modules/core/img/brand/logo.svg'}}"></img>
+       	</div>
+       	<div class="clearfix">
+	       	<form class="form-horizontal col-md-6 col-sm-6 col-xs-12 pull-left" data-ng-submit="update()" novalidate>
+	            <fieldset>
+	                <div class="form-group">
+	                    <input type="submit" class="btn btn-primary" value="Save" />
+	                </div>
+					<div data-ng-show="error" class="text-danger">
+						<strong data-ng-bind="error"></strong>
+					</div>
+	                <div class="form-group">
+	                    <label class="control-label" for="name">Name</label>
+	                    <div class="controls">
+	                        <input type="text" data-ng-model="bookito.name" id="name" class="form-control" placeholder="Name" required="required">
+	                    </div>
+	                </div>
+	                <div class="form-group">
+	                    <label class="control-label" for="description">Description</label>
+	                    <div class="controls">
+	                        <input type="text" data-ng-model="bookito.description" id="description" class="form-control" placeholder="Description" required="required">
+	                    </div>
+	                </div>
+	                <div class="form-group">
+	                    <label class="control-label" for="coverImageUrl">Cover Image Url</label>
+	                    <div class="controls">
+	                        <input type="text" data-ng-model="bookito.coverImageUrl" id="coverImageUrl" class="form-control" placeholder="Cover Image Url" >
+	                    </div>
+	                </div>
+	            </fieldset>
+	        </form>
+       	</div>
+		<hr />
+       	<div class="col-md-12 col-sm-12 header">
+       		<h3>Pages <a class="btn" data-ng-click="addPage()">Add Page</a></h3>
+       	</div>
+       	<div class="col-md-6 col-sm-6 bookito-page-list">
+       		<div class="list-group">
+				<a data-ng-repeat="page in bookito.pages" data-ng-click="activatePage(page)" data-ng-class="{'active': page.isActive}" class="list-group-item">
+					<span data-ng-if="page.choices.length == 0" class="glyphicon glyphicon-asterisk pull-right red"></span>
+					<h4 class="list-group-item-heading" data-ng-bind="page.title"></h4>
+				</a>
+			</div>
+       	</div>
+
+		<div data-ng-if="activePage" class="col-md-6 col-sm-6 col-xs-12 pull-right">
+
+			<tabset id="pageEditor">
+				<tab heading="Properties">
+					<div class="form-group">
+						<label class="control-label" for="name">Page Title</label>
+						<div class="controls">
+							<input type="text" data-ng-model="activePage.title" id="pageTitle" class="form-control" placeholder="Page Title" required="required">
+						</div>
+					</div>
+					<div class="form-group">
+						<label class="control-label" for="pageImageUrl">Image URL</label>
+						<div class="controls">
+							<input type="text" data-ng-model="activePage.imageUrl" id="pageImageUrl" class="form-control" placeholder="Image URL">
+						</div>
+					</div>
+					<div class="form-group">
+						<label class="control-label" for="pageTags">Tags</label>
+						<tags-input ng-model="activePage.tags" id="pageTags" ></tags-input>
+					</div>
+				</tab>
+				<tab heading="Content">
+					<label class="control-label" for="pageBody">Body</label>
+					<div class="controls">
+						<textarea rows="10" data-ng-model="activePage.body" id="pageBody" class="form-control" placeholder="Body"></textarea>
+					</div>
+				</tab>
+				<tab heading="Choices">
+					<a class="btn" data-ng-click="addChoice(activePage)">Add Choice</a>
+					<div data-ng-repeat="choice in activePage.choices">
+						<div class="well well-sm container-fluid">
+							<div>
+								<span data-ng-click="activePage.choices.splice($index, 1)" class="glyphicon glyphicon-remove"></span>
+							</div>
+							<div class="form-group">
+								<label class="control-label" >Display Text</label>
+								<div class="controls">
+									<input type="text" data-ng-model="choice.displayText" class="form-control" placeholder="Display Text" />
+								</div>
+							</div>
+							<div class="form-group">
+								<label class="control-label" >Linked Page</label>
+								<div class="controls">
+									<input typeahead="page as page.title for page in bookito.pages | filter:{title: $viewValue} | limitTo:8" data-ng-model="choice.page" class="form-control" placeholder="Linked Page" />
+								</div>
+							</div>
+
+						</div>
+					</div>
+				</tab>
+			</tabset>
+			<div>
+				<div class="form-group">
+                    <input type="submit" class="btn btn-primary" data-ng-click="updateWithNoRedirect()" value="Save and Continue" />
+                </div>
+			</div>
+		</div>
+    </div>
+
+</section>

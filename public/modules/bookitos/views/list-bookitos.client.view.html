@@ -1,0 +1,19 @@
+<section data-ng-controller="BookitosController" data-ng-init="find()">
+    <div class="page-header">
+        <h1>Bookitos</h1>
+    </div>
+    <div class="list-group">
+        <a data-ng-repeat="bookito in bookitos" data-ng-href="#!/bookitos/{{bookito._id}}" class="list-group-item">
+			<small class="list-group-item-text">
+				Posted on
+				<span data-ng-bind="bookito.created | date:'medium'"></span>
+				by
+				<span data-ng-bind="bookito.user.displayName"></span>
+			</small>
+			<h4 class="list-group-item-heading" data-ng-bind="bookito.name"></h4>
+        </a>
+    </div>
+    <div class="alert alert-warning text-center" data-ng-hide="!bookitos.$resolved || bookitos.length">
+    	No Bookitos yet, why don't you <a href="/#!/bookitos/create">create one</a>?
+    </div>
+</section>

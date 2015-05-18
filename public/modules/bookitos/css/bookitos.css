@@ -1,0 +1,8 @@
+.bookito-page-list{
+	max-height: 500px;
+	overflow-y: auto;
+}
+
+#pageEditor{
+	min-height: 300px;
+}
