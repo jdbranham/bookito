@@ -4,6 +4,12 @@ Bookito is built on the Mean.js framework.
 [![MEAN.JS Logo](http://meanjs.org/img/logo-small.png)](http://meanjs.org/)
 
 
+## About
+Bookit is a fun project that provides a user interface to create 'Bookitos', or small books online.
+A bookito is like a "Choose your own adventure" book, where at the end of each page there is a choice that leads to another page.
+Bookito can also be used to create decision trees or 'expert tools' for business application.
+
+
 
 ## Before You Begin
 Before you begin we recommend you read about the basic building blocks that assemble a MEAN.JS application:
@@ -88,19 +94,10 @@ Windows users can follow instructions found [here](http://www.websense.com/suppo
 To generate the key and certificate and place them in the *config/sslcert* folder.
 
 ## Getting Started With MEAN.JS
-You have your application running but there are a lot of stuff to understand, we recommend you'll go over the [Official Documentation](http://meanjs.org/docs.html).
-In the docs we'll try to explain both general concepts of MEAN components and give you some guidelines to help you improve your development process. We tried covering as many aspects as possible, and will keep update it by your request, you can also help us develop the documentation better by checking out the *gh-pages* branch of this repository.
+You have your application running but there is a lot of stuff to understand, we recommend you'll go over the [Official Documentation](http://meanjs.org/docs.html).
 
-## Community
-* Use to [Offical Website](http://meanjs.org) to learn about changes and the roadmap.
-* Join #meanjs on freenode.
-* Discuss it in the new [Google Group](https://groups.google.com/d/forum/meanjs)
-* Ping us on [Twitter](http://twitter.com/meanjsorg) and [Facebook](http://facebook.com/meanjs)
 
-## Live Example
-Browse the live MEAN.JS example on [http://meanjs.herokuapp.com](http://meanjs.herokuapp.com).
-
-## Credits
+## MEAN.JS Credits
 Inspired by the great work of [Madhusudhan Srinivasa](https://github.com/madhums/)
 The MEAN name was coined by [Valeri Karpov](http://blog.mongodb.org/post/49262866911/the-mean-stack-mongodb-expressjs-angularjs-and)
 
