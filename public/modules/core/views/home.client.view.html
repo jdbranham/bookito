@@ -14,7 +14,8 @@
 		</div>
 		<div class="row">
 			<p>
-				<a class="btn btn-primary btn-lg" href="#!/bookitos/create" target="_blank">Get Started!</a>
+				<a data-ng-hide="authentication.user" class="btn btn-primary btn-lg" href="/#!/signin">Get Started!</a>
+				<a data-ng-show="authentication.user" class="btn btn-primary btn-lg" href="#!/bookitos/create">Get Started!</a>
 			</p>
 		</div>
 	</div>

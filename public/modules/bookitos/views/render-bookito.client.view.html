@@ -1,0 +1,40 @@
+<section data-ng-controller="BookitosController" data-ng-init="findPage()">
+	<div class="clearfix">
+		<div class="page-header">
+			<h1 data-ng-bind="activePage.title"></h1>
+		</div>
+		<div class="pull-right" data-ng-show="((authentication.user) && (authentication.user._id == bookito.user._id))">
+			<a class="btn btn-primary" href="/#!/bookitos/{{bookito._id}}/edit">
+				<i class="glyphicon glyphicon-edit"></i>
+			</a>
+			<a class="btn btn-primary" data-ng-click="remove();">
+				<i class="glyphicon glyphicon-trash"></i>
+			</a>
+		</div>
+		<small>
+			<em class="text-muted">
+				Posted on
+				<span data-ng-bind="bookito.created | date:'mediumDate'"></span>
+				by
+				<span data-ng-bind="bookito.user.displayName"></span>
+			</em>
+		</small>
+	</div>
+
+
+	<div data-ng-if="activePage" class="well container">
+		<div>
+       		<img class="col-lg-12 col-md-12 col-sm-12, col-xs-12" data-ng-if="activePage.imageUrl" data-ng-src="{{activePage.imageUrl}}"></img>
+       	</div>
+       	<br />
+       	<div class="col-lg-12 col-md-12 col-sm-12, col-xs-12" btf-markdown="activePage.body"></div>
+	</div>
+	<div class="container-flow">
+		<div data-ng-repeat="choice in activePage.choices" class="choice-button-container pull-left">
+	   		<a class="btn btn-primary" data-ng-bind="choice.displayText" href="/#!/bookitos/{{bookito._id}}/page/{{choice.page._id}}"></a>
+	   	</div>
+	</div>
+	<div data-ng-if="activePage.choices.length === 0" >
+		<a class="btn btn-primary" href="/#!/bookitos/{{bookito._id}}/page/{{startPage._id}}">Back to the start!</a>
+	</div>
+</section>
