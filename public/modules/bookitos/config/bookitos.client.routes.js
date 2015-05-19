@@ -17,6 +17,11 @@ angular.module('bookitos').config(['$stateProvider',
 			url: '/bookitos/:bookitoId',
 			templateUrl: 'modules/bookitos/views/view-bookito.client.view.html'
 		}).
+		// View a specific page
+		state('readBookito', {
+			url: '/bookitos/:bookitoId/page/:pageId',
+			templateUrl: 'modules/bookitos/views/render-bookito.client.view.html'
+		}).
 		state('editBookito', {
 			url: '/bookitos/:bookitoId/edit',
 			templateUrl: 'modules/bookitos/views/edit-bookito.client.view.html'

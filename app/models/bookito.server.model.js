@@ -8,6 +8,10 @@ var mongoose = require('mongoose'),
 
 var PageSchema = new Schema({
 	_id: String,
+	isStartPage: {
+		type: Boolean,
+		default: false
+	},
 	title: {
 		type: String,
 		trim: true

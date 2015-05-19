@@ -2,9 +2,14 @@
 
 
 // Bookitos controller
-angular.module('bookitos').controller('BookitosController', ['$scope', '$stateParams', '$location', 'Authentication', 'Bookitos', 'GuidGen', 'notify',
-	function($scope, $stateParams, $location, Authentication, Bookitos, GuidGen, notify) {
+angular.module('bookitos').controller('BookitosController', ['$scope', '$stateParams', '$location', 'smoothScroll', 'Authentication', 'Bookitos', 'GuidGen', 'notify',
+	function($scope, $stateParams, $location, smoothScroll, Authentication, Bookitos, GuidGen, notify) {
 		$scope.authentication = Authentication;
+
+		$scope.scrollTo = function(id) {
+			var element = document.getElementById(id);
+			smoothScroll(element);
+		};
 
 		// Create new Bookito
 		$scope.create = function() {
@@ -80,8 +85,22 @@ angular.module('bookitos').controller('BookitosController', ['$scope', '$statePa
 
 		// Find existing Bookito
 		$scope.findOne = function() {
-			$scope.bookito = Bookitos.get({
+			Bookitos.get({
 				bookitoId: $stateParams.bookitoId
+			}).$promise.then(function(bookito){
+				$scope.bookito = bookito;
+				$scope.startPage = $scope.getStartPage(bookito);
+			});
+		};
+
+		// Find existing Bookito and set active page
+		$scope.findPage = function() {
+			Bookitos.get({
+				bookitoId: $stateParams.bookitoId
+			}).$promise.then(function(bookito){
+				$scope.bookito = bookito;
+				$scope.startPage = $scope.getStartPage(bookito);
+				$scope.activatePageById($stateParams.pageId);
 			});
 		};
 
@@ -96,6 +115,9 @@ angular.module('bookitos').controller('BookitosController', ['$scope', '$statePa
 							tags: [],
 							choices:[]
 						};
+			if(bookito.pages.length === 0){
+				page.isStartPage = true;
+			}
 			bookito.pages.push(page);
 			$scope.activatePage(page);
 		};
@@ -118,6 +140,48 @@ angular.module('bookitos').controller('BookitosController', ['$scope', '$statePa
 					$scope.bookito.pages[pageIndex].isActive = false;
 				}
 			}
+		};
+
+		// Activate a page
+		$scope.activatePageThenScroll = function(page, elementId){
+			$scope.activatePage(page);
+			$scope.scrollTo(elementId);
+		};
+
+		// Activate a page by the id
+		$scope.activatePageById = function(pageId){
+			for (var pageIndex = 0; pageIndex < $scope.bookito.pages.length; pageIndex++) {
+				if(pageId === $scope.bookito.pages[pageIndex]._id){
+					$scope.activatePage($scope.bookito.pages[pageIndex]);
+				}
+			}
+		};
+
+		// Set the starting page
+		$scope.setStartPage = function(page){
+			for (var pageIndex = 0; pageIndex < $scope.bookito.pages.length; pageIndex++) {
+				if(page === $scope.bookito.pages[pageIndex]){
+					$scope.bookito.pages[pageIndex].isStartPage = true;
+				}
+				else{
+					$scope.bookito.pages[pageIndex].isStartPage = false;
+				}
+			}
+		};
+
+		// Get the starting page
+		$scope.getStartPage = function(bookito){
+			for (var pageIndex = 0; pageIndex < bookito.pages.length; pageIndex++) {
+				if(bookito.pages[pageIndex].isStartPage){
+					return bookito.pages[pageIndex];
+				}
+			}
+			notify({
+				message: 'There is no Starting Page set!',
+				duration: '5000',
+				position: 'right',
+				classes: ['warning']
+			});
 		};
 	}
 ]);

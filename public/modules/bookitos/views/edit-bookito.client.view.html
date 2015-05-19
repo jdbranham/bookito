@@ -24,13 +24,19 @@
 	                <div class="form-group">
 	                    <label class="control-label" for="description">Description</label>
 	                    <div class="controls">
-	                        <input type="text" data-ng-model="bookito.description" id="description" class="form-control" placeholder="Description" required="required">
+	                        <textarea data-ng-model="bookito.description" id="description" class="form-control" placeholder="Description" required="required"></textarea>
 	                    </div>
 	                </div>
 	                <div class="form-group">
 	                    <label class="control-label" for="coverImageUrl">Cover Image Url</label>
 	                    <div class="controls">
 	                        <input type="text" data-ng-model="bookito.coverImageUrl" id="coverImageUrl" class="form-control" placeholder="Cover Image Url" >
+	                    </div>
+	                </div>
+	                <div class="form-group">
+	                    <label class="control-label" for="startPage">Starting Page</label>
+	                    <div class="controls">
+	                        <input type="text" typeahead="page as page.title for page in bookito.pages | filter:{title: $viewValue} | limitTo:8" data-ng-model="bookito.startPage"  required="required" id="startPage" class="form-control" >
 	                    </div>
 	                </div>
 	            </fieldset>
@@ -42,8 +48,9 @@
        	</div>
        	<div class="col-md-6 col-sm-6 bookito-page-list">
        		<div class="list-group">
-				<a data-ng-repeat="page in bookito.pages" data-ng-click="activatePage(page)" data-ng-class="{'active': page.isActive}" class="list-group-item">
-					<span data-ng-if="page.choices.length == 0" class="glyphicon glyphicon-asterisk pull-right red"></span>
+				<a data-ng-repeat="page in bookito.pages" data-ng-click="activatePageThenScroll(page, 'pageEditor')" data-ng-class="{'active': page.isActive}" class="list-group-item">
+					<span data-ng-if="page.choices.length == 0" title="Ending Page" class="glyphicon glyphicon-asterisk pull-right red"></span>
+					<span data-ng-if="page.isStartPage" title="Starting Page" class="glyphicon glyphicon-asterisk pull-right green"></span>
 					<h4 class="list-group-item-heading" data-ng-bind="page.title"></h4>
 				</a>
 			</div>
@@ -51,8 +58,15 @@
 
 		<div data-ng-if="activePage" class="col-md-6 col-sm-6 col-xs-12 pull-right">
 
-			<tabset id="pageEditor">
+			<tabset class="pageEditor" id="pageEditor">
 				<tab heading="Properties">
+					<br />
+					<div class="form-group">
+						<div class="controls">
+							<a data-ng-if="!activePage.isStartPage" data-ng-click="setStartPage(activePage)" class="btn btn-default">Set as Start Page</a>
+							<span data-ng-if="activePage.isStartPage" class="label label-success">Starting Page</span>
+						</div>
+					</div>
 					<div class="form-group">
 						<label class="control-label" for="name">Page Title</label>
 						<div class="controls">
@@ -71,12 +85,14 @@
 					</div>
 				</tab>
 				<tab heading="Content">
+					<br />
 					<label class="control-label" for="pageBody">Body</label>
 					<div class="controls">
 						<textarea rows="10" data-ng-model="activePage.body" id="pageBody" class="form-control" placeholder="Body"></textarea>
 					</div>
 				</tab>
 				<tab heading="Choices">
+					<br />
 					<a class="btn" data-ng-click="addChoice(activePage)">Add Choice</a>
 					<div data-ng-repeat="choice in activePage.choices">
 						<div class="well well-sm container-fluid">
@@ -100,11 +116,13 @@
 					</div>
 				</tab>
 			</tabset>
+			<br />
 			<div>
 				<div class="form-group">
                     <input type="submit" class="btn btn-primary" data-ng-click="updateWithNoRedirect()" value="Save and Continue" />
                 </div>
 			</div>
+			<br />
 		</div>
     </div>
 

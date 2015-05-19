@@ -5,7 +5,7 @@ Bookito is built on the Mean.js framework.
 
 
 ## About
-Bookit is a fun project that provides a user interface to create 'Bookitos', or small books online.
+Bookito is a fun project that provides a user interface to create 'Bookitos', or small books online.
 A bookito is like a "Choose your own adventure" book, where at the end of each page there is a choice that leads to another page.
 Bookito can also be used to create decision trees or 'expert tools' for business application.
 

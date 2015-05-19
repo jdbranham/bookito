@@ -3,6 +3,11 @@
 	overflow-y: auto;
 }
 
-#pageEditor{
+.pageEditor{
 	min-height: 300px;
+}
+
+.choice-button-container{
+	margin-right: 1em;
+	margin-bottom: 1em;
 }

@@ -29,7 +29,10 @@ module.exports = {
 				'public/lib/angular-ui-utils/ui-utils.js',
 				'public/lib/angular-bootstrap/ui-bootstrap-tpls.js',
 				'public/lib/ng-tags-input/ng-tags-input.js',
-				'public/lib/angular-notify/dist/angular-notify.js'
+				'public/lib/angular-notify/dist/angular-notify.js',
+				'public/lib/showdown/compressed/Showdown.js',
+				'public/lib/angular-markdown-directive/markdown.js',
+				'public/lib/ngSmoothScroll/angular-smooth-scroll.js'
 			]
 		},
 		css: [
