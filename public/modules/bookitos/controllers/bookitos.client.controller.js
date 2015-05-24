@@ -22,7 +22,7 @@ angular.module('bookitos').controller('BookitosController', ['$scope', '$statePa
 
 			// Redirect after save
 			bookito.$save(function(response) {
-				$location.path('bookitos/' + response._id);
+				$location.path('bookitos/' + response._id + '/edit');
 
 				// Clear form fields
 				$scope.name = '';
@@ -90,7 +90,31 @@ angular.module('bookitos').controller('BookitosController', ['$scope', '$statePa
 			}).$promise.then(function(bookito){
 				$scope.bookito = bookito;
 				$scope.startPage = $scope.getStartPage(bookito);
+				$scope.checkForPages();
 			});
+		};
+
+		// Notify if there are no pages and the edit screen is active
+		$scope.checkForPages = function(){
+			if($scope.bookito.pages.length === 0){
+				if(S($location.path()).endsWith('edit')){
+					notify({
+						messageTemplate: '<span>There are no pages! <br />' +
+							'<a class="btn" data-ng-click="addPage()">Add a page now</a></span>',
+						scope: $scope,
+						duration: '10000',
+						position: 'right',
+						classes: ['warning']
+					});
+				} else{
+					notify({
+						message: 'There is no Starting Page set!',
+						duration: '5000',
+						position: 'right',
+						classes: ['warning']
+					});
+				}
+			}
 		};
 
 		// Find existing Bookito and set active page
@@ -109,8 +133,8 @@ angular.module('bookitos').controller('BookitosController', ['$scope', '$statePa
 			var bookito = $scope.bookito;
 			var page = {
 							_id: GuidGen.generate(),
-							title: 'Change me!',
-							body: 'Type some text',
+							title: 'Page ' + (bookito.pages.length + 1),
+							body: '',
 							imageUrl: '',
 							tags: [],
 							choices:[]
@@ -119,7 +143,7 @@ angular.module('bookitos').controller('BookitosController', ['$scope', '$statePa
 				page.isStartPage = true;
 			}
 			bookito.pages.push(page);
-			$scope.activatePage(page);
+			$scope.activatePageThenScroll(page, 'pageEditor');
 		};
 
 		// Add a choice to the page
@@ -176,12 +200,18 @@ angular.module('bookitos').controller('BookitosController', ['$scope', '$statePa
 					return bookito.pages[pageIndex];
 				}
 			}
-			notify({
-				message: 'There is no Starting Page set!',
-				duration: '5000',
-				position: 'right',
-				classes: ['warning']
-			});
+		};
+
+		$scope.deletePage = function(page){
+			if(confirm('Delete this page?')){
+				$scope.activePage = undefined;
+				for (var pageIndex = 0; pageIndex < $scope.bookito.pages.length; pageIndex++) {
+					if(page._id === $scope.bookito.pages[pageIndex]._id){
+						$scope.bookito.pages.splice([pageIndex], 1);
+					}
+				}
+			}
+
 		};
 	}
 ]);

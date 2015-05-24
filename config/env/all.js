@@ -32,7 +32,8 @@ module.exports = {
 				'public/lib/angular-notify/dist/angular-notify.js',
 				'public/lib/showdown/compressed/Showdown.js',
 				'public/lib/angular-markdown-directive/markdown.js',
-				'public/lib/ngSmoothScroll/angular-smooth-scroll.js'
+				'public/lib/ngSmoothScroll/angular-smooth-scroll.js',
+				'public/lib/string/lib/string.js'
 			]
 		},
 		css: [

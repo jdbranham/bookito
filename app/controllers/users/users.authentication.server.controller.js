@@ -4,6 +4,7 @@
  * Module dependencies.
  */
 var _ = require('lodash'),
+	S = require('string'),
 	errorHandler = require('../errors.server.controller'),
 	mongoose = require('mongoose'),
 	passport = require('passport'),
@@ -24,7 +25,7 @@ exports.signup = function(req, res) {
 	user.provider = 'local';
 	user.displayName = user.firstName + ' ' + user.lastName;
 
-	// Then save the user 
+	// Then save the user
 	user.save(function(err) {
 		if (err) {
 			return res.status(400).send({
@@ -90,8 +91,7 @@ exports.oauthCallback = function(strategy) {
 				if (err) {
 					return res.redirect('/#!/signin');
 				}
-
-				return res.redirect(redirectURL || '/');
+				return res.redirect(redirectURL || '/#!/');
 			});
 		})(req, res, next);
 	};
