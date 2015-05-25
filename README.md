@@ -2,7 +2,7 @@
 
 
 ## Bookito
-Continuous Deployment -
+Continuous Deployment
 http://bookito.savantly.net/
 
 
