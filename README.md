@@ -10,7 +10,17 @@ Bookito is a fun project that provides a user interface to create 'Bookitos', or
 A bookito is like a "Choose your own adventure" book, where at the end of each page there is a choice that leads to another page.
 Bookito can also be used to create decision trees or 'expert tools' for business application.
 
+## Features
+* Page Content types supported: Plain text, Markdown, or HTML.
+* Circular page references are supported.
+* Responsive design for a mobile friendly experience.
 
+## On the Roadmap
+* Multi-tenancy with domain separation
+* Private Bookitos
+* Flow-chart style page administration
+* Embedded Markdown/Html editor
+* Easy Social Sharing
 
 Bookito is built on the Mean.js framework.
 
