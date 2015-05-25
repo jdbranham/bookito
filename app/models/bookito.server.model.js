@@ -55,6 +55,10 @@ var BookitoSchema = new Schema({
 		trim: true
 	},
 	pages: [],
+	isPublic: {
+		type: Boolean,
+		default: true
+	},
 	created: {
 		type: Date,
 		default: Date.now

@@ -75,6 +75,12 @@ var UserSchema = new Schema({
 		}],
 		default: ['user']
 	},
+	memberOf: {
+		type: [{
+			type: Schema.ObjectId,
+			ref: 'Tenant'
+		}]
+	},
 	updated: {
 		type: Date
 	},
