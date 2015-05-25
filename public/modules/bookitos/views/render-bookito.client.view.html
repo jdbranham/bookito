@@ -23,8 +23,8 @@
 
 
 	<div data-ng-if="activePage" class="well container">
-		<div>
-       		<img class="text-center" data-ng-if="activePage.imageUrl" data-ng-src="{{activePage.imageUrl}}"></img>
+		<div class="text-center">
+       		<img class="col-sm-12, col-xs-12" data-ng-if="activePage.imageUrl" data-ng-src="{{activePage.imageUrl}}"></img>
        	</div>
        	<br />
        	<div class="col-lg-12 col-md-12 col-sm-12, col-xs-12" btf-markdown="activePage.body"></div>
