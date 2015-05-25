@@ -213,5 +213,10 @@ angular.module('bookitos').controller('BookitosController', ['$scope', '$statePa
 			}
 
 		};
+
+		$scope.toggleFullScreen = function(elementId){
+			var myEl = angular.element(document.querySelector('#'+elementId));
+			myEl.toggleClass('full-screen');
+		};
 	}
 ]);
